@@ -1,0 +1,33 @@
+{
+  "name": "passport-oauth-demo",
+  "version": "0.1.0",
+  "description": "Express/Passport demo using OAuth.",
+  "main": "index.js",
+  "scripts": {
+    "knex": "knex",
+    "start": "node-inspector & nodemon --debug",
+    "postinstall": "knex migrate:latest"
+  },
+  "author": "EDA",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-jwt": "^5.0.0",
+    "express-session": "^1.14.1",
+    "jsonwebtoken": "^7.1.9",
+    "knex": "^0.11.10",
+    "passport": "^0.3.2",
+    "passport-twitter": "^1.0.4",
+    "sqlite3": "^3.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-standard": "^2.0.0",
+    "node-inspector": "^0.12.8",
+    "nodemon": "^1.10.2"
+  }
+}
