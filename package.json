@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "knex": "knex",
-    "start": "node-inspector & nodemon --debug",
+    "dev": "nodemon index",
+    "start": "node index",
     "postinstall": "knex migrate:latest"
   },
   "author": "EDA",
