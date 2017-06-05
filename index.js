@@ -1,3 +1,5 @@
+require('dotenv').load()
+
 const cookieParser = require('cookie-parser')
 const express = require('express')
 const passport = require('passport')
@@ -13,8 +15,7 @@ process.on('unhandledRejection', (error, promise) => {
 
 const app = express()
 
-// A real server would never store the JWT signing secret here!
-app.set('JWT_SECRET', 'SECRET! SO, SO, SECRET!')
+app.set('JWT_SECRET', process.env.JWT_SECRET) // Can this be moved to api.js?
 
 app.use(cookieParser())
 app.use(passport.initialize())
