@@ -35,7 +35,7 @@ function getSecret (req, payload, done) {
 router.get('/open',
   verifyJwt({
     credentialsRequired: false,
-    getToken: auth.getTokenFromCookie,
+    getToken: auth.getToken,
     secret: getSecret
   }),
   (req, res) => {
@@ -50,7 +50,7 @@ router.get('/open',
 // Protect all routes beneath this point
 router.use(
   verifyJwt({
-    getToken: auth.getTokenFromCookie,
+    getToken: auth.getToken,
     secret: getSecret
   }),
   auth.handleError
