@@ -6,6 +6,7 @@
   "scripts": {
     "knex": "knex",
     "dev": "nodemon index",
+    "debug": "node --inspect --debug-brk index",
     "start": "node index",
     "postinstall": "knex migrate:latest"
   },
