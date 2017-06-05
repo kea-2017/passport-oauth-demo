@@ -9,17 +9,15 @@ const auth = require('../lib/auth.js')
 const router = express.Router()
 router.use(bodyParser.json())
 
-// Normally a session secret would never be committed to source control: we'd load it
-// from a .env file or come up with another way of generating it.
 // The only thing we need sessions for is the Twitter strategy, because it's OAuth 1a
 const session = expressSession({
   resave: false,
-  secret: 'CHANGE THIS IN PRODUCTION!',
-  saveUninitialized: false
+  saveUninitialized: false,
+  secret: process.env.SESSION_SECRET
 })
 
-// This is the only API route that uses Twitter strategy, to check if we can
-// issue a JWT in response to requests.
+// This is the only API route that uses Twitter strategy,
+// to check if we can issue a JWT in response to requests.
 router.get('/auth/twitter', session, passport.authenticate('twitter'))
 router.get('/auth/twitter/callback', session, auth.issueJwt)
 router.get('/auth/logout', (req, res) => {
@@ -37,7 +35,7 @@ function getSecret (req, payload, done) {
 router.get('/open',
   verifyJwt({
     credentialsRequired: false,
-    getToken: auth.getTokenFromCookie,
+    getToken: auth.getToken,
     secret: getSecret
   }),
   (req, res) => {
@@ -52,7 +50,7 @@ router.get('/open',
 // Protect all routes beneath this point
 router.use(
   verifyJwt({
-    getToken: auth.getTokenFromCookie,
+    getToken: auth.getToken,
     secret: getSecret
   }),
   auth.handleError
