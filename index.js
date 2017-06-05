@@ -18,13 +18,14 @@ const app = express()
 app.set('JWT_SECRET', process.env.JWT_SECRET) // Can this be moved to api.js?
 
 app.use(cookieParser())
-app.use(passport.initialize())
-app.use('/api', apiRoutes)
+app.use(passport.initialize()) // Can this be moved to api.js?
+app.use('/api/v1', apiRoutes)
 
 app.get('/', (req, res) => {
   res.send(`Token is: ${req.cookies.token}`)
 })
 
+// Can these be moved to api.js?
 passport.use(new TwitterStrategy(auth.twitterConfig, auth.verify))
 passport.serializeUser(users.serialize)
 passport.deserializeUser(users.deserialize)
